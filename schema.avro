@@ -1,0 +1,17 @@
+
+
+{"namespace": "awesome.tony",
+ "type": "record",
+ "name": "Envelope",
+ "fields": [
+     {"name": "name", "type": "string"},
+     {"name": "values",  "type": {"type": "array", "items": [{"namespace": "awesome.tony",
+ 				"type": "record",
+ 				"name": "Garbage",
+				 "fields": [
+     				{"name": "values",  "type": {"type": "array", "items": ["Garbage", "string", "long"]}} 
+ ]
+}, "string", "long"] }}
+ ]
+}
+
