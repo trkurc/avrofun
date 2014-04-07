@@ -4,7 +4,7 @@
  "type": "record",
  "name": "Envelope",
  "fields": [
-     {"name": "name", "type": {"avro.java.string": "String", "type": "string"}}
+     {"name": "name", "type": "string"}
  ]
 }
 

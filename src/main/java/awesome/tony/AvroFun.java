@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.apache.avro.Schema;
 import org.apache.avro.Schema.Parser;
-import org.apache.avro.Schema.Type;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericDatumWriter;
@@ -26,23 +25,16 @@ public class AvroFun {
 			DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<GenericRecord>(datumWriter);
 			dataFileWriter.create(schema, file);
 
-			for(int i=0; i<12000; i++){
+			for(int i=0; i<100; i++){
 
 				GenericData.Record a = new GenericData.Record(schema);
-				Schema arr = schema.getField("values").schema().getElementType();
-				ArrayList<Object> fields = new ArrayList<Object>();
-				fields.add("hello");
-				fields.add(new Long(5));
-				for(Schema t : arr.getTypes()){
-					if(t.getType() == Type.RECORD){
-						GenericData.Record f = new GenericData.Record(t);
-						fillGarbage(f);
-						fields.add(f);
-					}
-
+				if(COUNT++ != 30){
+					a.put("name", randomString(RANDOM.nextInt(6<<10)));
 				}
-				a.put("name", "steve");
-				a.put("values", fields);
+				else{
+					a.put("name", randomString(146<<20));
+				}
+							
 				dataFileWriter.append(a);
 			}
 			dataFileWriter.close();

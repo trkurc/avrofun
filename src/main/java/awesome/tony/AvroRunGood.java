@@ -4,24 +4,23 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Random;
-import java.util.zip.GZIPInputStream;
 
 import org.apache.avro.Schema;
 import org.apache.avro.Schema.Parser;
 import org.apache.avro.file.DataFileStream;
 import org.apache.avro.generic.GenericDatumReader;
 
-public class AvroRun {
+public class AvroRunGood {
 	static Random RANDOM = new Random(5);
 	
 	public static void main(String args[]){
 		try{
-			//Parser p = new Parser();
+			Parser p = new Parser();
 			
-			//Schema schema = new Parser().parse(new File("schema.avro"));
+			Schema schema = new Parser().parse(new File("good_schema.avro"));
 		
 			InputStream in = new FileInputStream("users.avro");
-			GenericDatumReader dr = new GenericDatumReader();
+			GenericDatumReader dr = new GenericDatumReader(schema);
 			
 			int count = 0;
 			DataFileStream df = new DataFileStream(in, dr);
